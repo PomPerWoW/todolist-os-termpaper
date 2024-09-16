@@ -1,5 +1,4 @@
 import os
-import logging
 
 from flask import Flask
 from flask_smorest import Api
@@ -8,6 +7,7 @@ from dotenv import load_dotenv
 from app.db import db
 from app.main import blp as MainBlueprint
 from app.users import blp as UsersBlueprint
+from app.tasks import blp as TasksBlueprint
 
 
 def create_app():
@@ -31,12 +31,12 @@ def create_app():
     db.init_app(app)
 
     with app.app_context():
-        logging.info("Creating tables")
         db.create_all()
 
     api = Api(app)
 
     api.register_blueprint(MainBlueprint)
     api.register_blueprint(UsersBlueprint)
+    api.register_blueprint(TasksBlueprint)
 
     return app

@@ -4,5 +4,9 @@ from flask.views import MethodView
 
 @blp.route("/")
 class Main(MethodView):
+    @blp.response(
+        200,
+        description="APIs test.",
+    )
     def get(self):
-        return "This is The Main Blueprint"
+        return {"status": "success", "message": "This is The Main Blueprint."}
