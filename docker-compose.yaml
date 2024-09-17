@@ -1,0 +1,31 @@
+services:
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+    # networks:
+    #   - todo-app
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: todolist
+      MYSQL_USER: osProject
+      MYSQL_PASSWORD: password
+
+  # todo-app:
+  #   build: .
+  #   ports:
+  #     - "3000:3000"
+  #   networks:
+  #     - todo-app
+  #   depends_on:
+  #     - mysql
+  #   environment:
+  #     SQLALCHEMY_DATABASE_URI: mysql+pymysql://osProject:password@mysql/todolist
+  #     SECRET_KEY: super-secret-meow-3t
+    
+
+# networks:
+#   todo-app:
+#     driver: bridge
