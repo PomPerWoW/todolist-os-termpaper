@@ -24,7 +24,7 @@ const handleUsernameSubmit = function (event) {
 };
 
 const getUserData = async function (username, onLoad = false) {
-    const url = `http://127.0.0.1:5000/api/v1/users/username/${username}`;
+    const url = `http://127.0.0.1:3000/api/v1/users/username/${username}`;
 
     try {
         const response = await fetch(url, {
