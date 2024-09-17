@@ -1,0 +1,44 @@
+# .dockerignore
+
+# Ignore Python bytecode files
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+
+# Ignore environment files
+.env
+*.env
+
+# Ignore virtual environment folders
+venv/
+env/
+.virtualenv/
+
+# Ignore local Python settings
+migrations/
+
+# Ignore node_modules folder for React
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Ignore build folder for React
+build/
+dist/
+.cache/
+coverage/
+
+# Ignore logs
+*.log
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore git folder
+.git/
+.gitignore
+
+# Tailwind input css file
+input.css

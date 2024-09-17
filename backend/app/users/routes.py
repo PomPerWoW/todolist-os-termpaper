@@ -45,7 +45,7 @@ class UsersList(MethodView):
 
 
 @blp.route("/users/<string:user_id>")
-class Users(MethodView):
+class UsersId(MethodView):
     @blp.response(
         200,
         description="Get user by id.",
@@ -81,4 +81,16 @@ class Users(MethodView):
 
         db.session.add(user)
         db.session.commit()
+        return SingleUserResponseSchema().dump({"data": user})
+
+
+@blp.route("/users/username/<string:username>")
+class UsersName(MethodView):
+    @blp.response(
+        200,
+        description="Get user by username.",
+        schema=SingleUserResponseSchema,
+    )
+    def get(self, username):
+        user = UserModel.query.filter_by(username=username).first_or_404()
         return SingleUserResponseSchema().dump({"data": user})

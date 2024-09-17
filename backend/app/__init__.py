@@ -2,6 +2,7 @@ import os
 
 from flask import Flask
 from flask_smorest import Api
+from flask_cors import CORS
 from dotenv import load_dotenv
 
 from app.db import db
@@ -14,6 +15,14 @@ def create_app():
     load_dotenv()
 
     app = Flask(__name__)
+    cors = CORS()
+
+    cors.init_app(
+        app,
+        resources={
+            r"/api/*": {"origins": {"http://127.0.0.1:5500", "http://localhost:5500"}}
+        },
+    )
 
     app.config["PROPAGATE_EXCEPTIONS"] = True
     app.config["API_TITLE"] = "Todolist REST API"
