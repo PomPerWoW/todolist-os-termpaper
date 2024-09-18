@@ -5,27 +5,37 @@ services:
       - "3306:3306"
     volumes:
       - ./mysql:/var/lib/mysql
-    # networks:
-    #   - todo-app
+    networks:
+      - todo-app
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: todolist
       MYSQL_USER: osProject
       MYSQL_PASSWORD: password
 
-  # todo-app:
-  #   build: .
-  #   ports:
-  #     - "3000:3000"
-  #   networks:
-  #     - todo-app
-  #   depends_on:
-  #     - mysql
-  #   environment:
-  #     SQLALCHEMY_DATABASE_URI: mysql+pymysql://osProject:password@mysql/todolist
-  #     SECRET_KEY: super-secret-meow-3t
+  todo-app:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    networks:
+      - todo-app
+    depends_on:
+      - mysql
+    environment:
+      SQLALCHEMY_DATABASE_URI: mysql+pymysql://osProject:password@mysql/todolist
+      SECRET_KEY: super-secret-meow-3t
     
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:8080"
+    networks:
+      - todo-app
+    volumes:
+      - ./frontend/src:/app/src
+    depends_on:
+      - todo-app
 
-# networks:
-#   todo-app:
-#     driver: bridge
+networks:
+  todo-app:
+    driver: bridge

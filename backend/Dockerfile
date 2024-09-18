@@ -27,13 +27,12 @@ ENV PYTHONUNBUFFERED=TRUE
 ENV PYTHONDONTWRITEBYTECODE=TRUE
 ENV PATH="/opt/program:${PATH}"
 
-COPY app /opt/program
+# Set up the program in the image
+COPY . /opt/program
 WORKDIR /opt/program
 
-RUN ls
-RUN mkdir ./model/temp
-RUN chmod o+rwX ./model/temp
+# EXPOSE 3000
 
-RUN chmod +x serve
-
-ENTRYPOINT [ "python3", "serve" ]
+# Run the program
+COPY . .
+CMD ["flask", "run", "--debug"]
