@@ -24,7 +24,14 @@ def create_app():
     cors.init_app(
         app,
         resources={
-            r"/api/*": {"origins": ["http://frontend:8080", "http://127.0.0.1:8080"]}
+            r"/api/*": {
+                "origins": [
+                    "http://frontend:8080",
+                    "http://127.0.0.1:8080",
+                    "http://127.0.0.1:5500",
+                    "http://localhost:5500",
+                ]
+            }
         },
     )
 

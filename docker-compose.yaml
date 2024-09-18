@@ -16,13 +16,6 @@ services:
       - "3000:3000"
     volumes:
       - ./backend:/opt/program
-      - /opt/program/__pycache__
-      - /opt/program/db/__pycache__
-      - /opt/program/db/models/__pycache__
-      - /opt/program/main/__pycache__
-      - /opt/program/schemas/__pycache__
-      - /opt/program/tasks/__pycache__
-      - /opt/program/users/__pycache__
     networks:
       - todo-app-net
     env_file:
@@ -37,7 +30,8 @@ services:
     networks:
       - todo-app-net
     volumes:
-      - ./frontend/src:/usr/share/nginx/html
+      - ./frontend:/usr/share/nginx/html
+      - /usr/share/nginx/html/node_modules 
     depends_on:
       - todo-app
 

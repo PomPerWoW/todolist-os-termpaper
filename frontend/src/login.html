@@ -24,7 +24,6 @@
                 </h1>
                 <form
                     class="p-16 bg-slate-100 rounded-2xl text-center flex flex-col gap-4 bg-opacity-85"
-                    onsubmit="handleUsernameSubmit(event)"
                 >
                     <h3 class="text-lg text-sky-700">Enter your username</h3>
                     <input
@@ -33,14 +32,16 @@
                         type="text"
                         placeholder="Username"
                     />
+                    <hr class="h-0.5 mt-4 bg-gray-400" />
                     <button
+                        id="submitUser"
                         class="bg-sky-700 text-white px-4 py-2 rounded-md"
                         type="submit"
                     >
                         Enter
                     </button>
-                    <p id="userNotFound" class="text-sky-700 hidden">
-                        User not found!
+                    <p id="userError" class="text-sky-700 hidden">
+                        Enter valid username!
                     </p>
                 </form>
             </div>
