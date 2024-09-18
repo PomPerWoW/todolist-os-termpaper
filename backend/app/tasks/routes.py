@@ -75,10 +75,24 @@ class Tasks(MethodView):
                 message="Task not found.",
             )
 
-        task.task_title = task_data["task_title"]
-        task.task_description = task_data["task_description"]
-        task.completed = task_data["completed"]
+        if "task_title" in task_data:
+            task.task_title = task_data["task_title"]
+
+        if "completed" in task_data:
+            task.completed = task_data["completed"]
 
         db.session.add(task)
         db.session.commit()
         return SingleTaskResponseSchema().dump({"data": task})
+
+
+@blp.route("/tasks/latest")
+class TasksList(MethodView):
+    @blp.response(200, description="Get latest task.", schema=SingleTaskResponseSchema)
+    def get(self):
+        latest_task = TaskModel.query.order_by(TaskModel.id.desc()).first()
+
+        if not latest_task:
+            abort(404, message="No tasks found.")
+
+        return SingleTaskResponseSchema().dump({"data": latest_task})

@@ -6,7 +6,6 @@ class TaskModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     task_title = db.Column(db.String(80), nullable=False)
-    task_description = db.Column(db.String(255))
     user_id = db.Column(
         db.Integer, db.ForeignKey("users.id"), unique=False, nullable=False
     )

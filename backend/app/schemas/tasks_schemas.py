@@ -19,5 +19,4 @@ class SingleTaskResponseSchema(Schema):
 
 class TaskUpdateSchema(Schema):
     task_title = fields.Str()
-    task_description = fields.Str()
     completed = fields.Boolean(load_default=False)

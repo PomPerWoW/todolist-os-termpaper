@@ -9,5 +9,4 @@ class PlainUserSchema(Schema):
 class PlainTaskSchema(Schema):
     id = fields.Str(dump_only=True)
     task_title = fields.Str(required=True)
-    task_description = fields.Str()
     completed = fields.Boolean(dump_only=True)

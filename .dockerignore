@@ -1,5 +1,9 @@
 # .dockerignore
 
+# Ignore Dockerfile and docker-compose
+Dockerfile
+docker-compose.yaml
+
 # Ignore Python bytecode files
 **/__pycache__/
 **/*.pyc

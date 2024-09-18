@@ -14,32 +14,36 @@
     </head>
     <body>
         <div
-            class="flex justify-center items-center flex-col h-screen bg-gradient-to-r from-cyan-200 to-blue-600"
+            class="h-screen bg-gradient-to-r from-cyan-200 to-blue-600 flex justify-center items-center"
         >
-            <h1 class="uppercase mb-8 text-4xl font-semibold text-white">
-                Todolist
-            </h1>
-            <form
-                class="p-16 bg-slate-100 rounded-2xl text-center flex flex-col gap-4 bg-opacity-85"
-                onsubmit="handleUsernameSubmit(event)"
+            <div
+                class="mx-auto my-0 max-w-3xl px-[3.2rem] py-0 flex justify-center flex-col items-center"
             >
-                <h3 class="text-lg text-sky-700">Enter your username</h3>
-                <input
-                    class="p-2 shadow-md shadow-slate-300"
-                    id="username"
-                    type="text"
-                    placeholder="Username"
-                />
-                <button
-                    class="bg-sky-500 text-white px-4 py-2 rounded-md"
-                    type="submit"
+                <h1 class="uppercase mb-8 text-4xl font-semibold text-white">
+                    Todolist
+                </h1>
+                <form
+                    class="p-16 bg-slate-100 rounded-2xl text-center flex flex-col gap-4 bg-opacity-85"
+                    onsubmit="handleUsernameSubmit(event)"
                 >
-                    Enter
-                </button>
-                <p id="userNotFound" class="text-sky-700 hidden">
-                    User not found!
-                </p>
-            </form>
+                    <h3 class="text-lg text-sky-700">Enter your username</h3>
+                    <input
+                        class="p-2 shadow-md shadow-slate-300"
+                        id="username"
+                        type="text"
+                        placeholder="Username"
+                    />
+                    <button
+                        class="bg-sky-700 text-white px-4 py-2 rounded-md"
+                        type="submit"
+                    >
+                        Enter
+                    </button>
+                    <p id="userNotFound" class="text-sky-700 hidden">
+                        User not found!
+                    </p>
+                </form>
+            </div>
         </div>
 
         <script src="login.js"></script>
