@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM python:3.9-alpine
 
 ENV DEBIAN_FRONTEND=noninteractive 
 
@@ -12,27 +12,22 @@ RUN poetry install --no-interaction --no-ansi --no-cache
 
 # Set some environment variables. PYTHONUNBUFFERED keeps Python from buffering our standard
 # output stream, which means that logs can be delivered to the user quickly. PYTHONDONTWRITEBYTECODE
-# keeps Python from writing the .pyc files which are unnecessary in this case. We also update
-# PATH so that the train and serve programs are found when the container is invoked.
+# keeps Python from writing the .pyc files which are unnecessary in this case. 
 
-RUN apt-get -y update && apt-get install -y --no-install-recommends \
-         nginx \
-         ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
-
-# RUN apt-get update && apt install -y build-essential libx11-dev libgl1-mesa-dev
-
+RUN rm -rf /var/cache/apt/archives /var/lib/apt/lists/*
 
 ENV PYTHONUNBUFFERED=TRUE
 ENV PYTHONDONTWRITEBYTECODE=TRUE
-ENV PATH="/opt/program:${PATH}"
 
-# Set up the program in the image
+# Copy the application code into the container
 COPY . /opt/program
 WORKDIR /opt/program
 
+# Expose port 3000 for Gunicorn
 # EXPOSE 3000
 
-# Run the program
-COPY . .
-CMD ["flask", "run", "--debug"]
+# Run the app using Gunicorn (bind to port 3000, with 1 worker processes)
+CMD ["gunicorn", "-b", "0.0.0.0:3000", "app:create_app()"]
+
+# Run the app using Gunicorn (bind to port 3000, with 4 worker processes)
+# CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:3000", "app:create_app()"]

@@ -14,6 +14,10 @@ const loadData = async function (userId) {
 
     const data = await getUserData(userId);
 
+    if (!data) {
+        return;
+    }
+
     const username = data.username;
     usernameField.innerHTML = `${username}'s Todo`;
 
@@ -54,6 +58,7 @@ const changeTaskData = async function (taskId, taskCompleted, taskName = null) {
 
         const res = await response.json();
         const data = res.data;
+        console.log(data);
 
         return data;
     } catch (error) {

@@ -4,38 +4,46 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./mysql:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
     networks:
-      - todo-app
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: todolist
-      MYSQL_USER: osProject
-      MYSQL_PASSWORD: password
+      - todo-app-net
+    env_file:
+      - ./env/mysql.env
 
   todo-app:
     build: ./backend
     ports:
       - "3000:3000"
+    volumes:
+      - ./backend:/opt/program
+      - /opt/program/__pycache__
+      - /opt/program/db/__pycache__
+      - /opt/program/db/models/__pycache__
+      - /opt/program/main/__pycache__
+      - /opt/program/schemas/__pycache__
+      - /opt/program/tasks/__pycache__
+      - /opt/program/users/__pycache__
     networks:
-      - todo-app
+      - todo-app-net
+    env_file:
+      - ./env/backend.env
     depends_on:
       - mysql
-    environment:
-      SQLALCHEMY_DATABASE_URI: mysql+pymysql://osProject:password@mysql/todolist
-      SECRET_KEY: super-secret-meow-3t
-    
+
   frontend:
     build: ./frontend
     ports:
       - "8080:8080"
     networks:
-      - todo-app
+      - todo-app-net
     volumes:
-      - ./frontend/src:/app/src
+      - ./frontend/src:/usr/share/nginx/html
     depends_on:
       - todo-app
 
+volumes:
+  mysql-data:
+
 networks:
-  todo-app:
+  todo-app-net:
     driver: bridge
