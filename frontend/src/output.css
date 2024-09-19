@@ -812,10 +812,6 @@ html {
   --tw-gradient-to: #2563eb var(--tw-gradient-to-position);
 }
 
-.to-red-600 {
-  --tw-gradient-to: #dc2626 var(--tw-gradient-to-position);
-}
-
 .p-16 {
   padding: 4rem;
 }
